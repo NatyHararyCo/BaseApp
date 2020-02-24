@@ -12,7 +12,7 @@ class HomeViewModel : BaseViewModel() {
 //        emit(retrievedData)
 //    }
 
-    fun getPersonsFromRepo(): MutableLiveData<List<Result?>>? {
+    fun getPersonsFromRepo(): MutableLiveData<ArrayList<Result?>> {
         return homeRepo.getPersonsFromServer()
     }
 }

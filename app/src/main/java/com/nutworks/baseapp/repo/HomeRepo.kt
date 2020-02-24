@@ -10,12 +10,13 @@ import retrofit2.converter.gson.GsonConverterFactory
 class HomeRepo : BaseRepo() {
 
     private var restApi: RestApi
-    private var retrofit = Retrofit.Builder().baseUrl("https://swapi.co/") //TODO make this a constant
-        .addConverterFactory(GsonConverterFactory.create()).build()
-    var persons : MutableLiveData<List<Result?>>? = null
-    private lateinit var client : Retrofit
+    private var retrofit =
+        Retrofit.Builder().baseUrl("https://swapi.co/") //TODO make this a constant
+            .addConverterFactory(GsonConverterFactory.create()).build()
+    var persons: MutableLiveData<ArrayList<Result?>>
+    private lateinit var client: Retrofit
 
-    init{
+    init {
         restApi = retrofit.create()
         persons = MutableLiveData()
 
@@ -23,13 +24,15 @@ class HomeRepo : BaseRepo() {
 
 //    suspend fun getPersons(personName : String) = restApi.getStarWarsPeople(personName)
 
-    fun getPersonsFromServer() : MutableLiveData<List<Result?>>? {
-        restApi.getStarWarsPeople("").enqueue(object : Callback<PersonResponse>{
-            override fun onResponse(
-                call: Call<PersonResponse>,
-                response: Response<PersonResponse>
-            ) {
-                persons?.value = response.body()?.results
+    fun getPersonsFromServer(): MutableLiveData<ArrayList<Result?>> {
+        restApi.getStarWarsPeople("").enqueue(object : Callback<PersonResponse> {
+            override fun onResponse(call: Call<PersonResponse>, response: Response<PersonResponse>) {
+                if (response.isSuccessful) {
+                    persons.value = response.body()?.results
+                }
+                else{
+                    //TODO make some error return
+                }
             }
 
             override fun onFailure(call: Call<PersonResponse>, t: Throwable) {
