@@ -5,6 +5,7 @@ A playground app which can be used as a base for other applications with similar
 ### Currently uses the following components/features:
 - Kotlin-only
 - Retrofit2 + Kotlin Coroutines
+- RecyclerView
 - MVVM architecture
 - Livedata
 - Bottom Navigation + Fragments
