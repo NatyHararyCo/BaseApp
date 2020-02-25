@@ -48,7 +48,7 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun getPersons(){
-        viewModel.getPersonsFromRepo().observe(this, Observer {
+        viewModel.personsLiveData.observe(this, Observer {
                 result -> adapter.setData(result)})
     }
 }

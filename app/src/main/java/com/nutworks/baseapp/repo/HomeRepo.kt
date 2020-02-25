@@ -2,43 +2,27 @@ package com.nutworks.baseapp.repo
 
 import androidx.lifecycle.MutableLiveData
 import com.nutworks.baseapp.api.RestApi
-import com.nutworks.baseapp.api.response.PersonResponse
 import com.nutworks.baseapp.api.response.Result
-import retrofit2.*
+import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.create
 
 class HomeRepo : BaseRepo() {
 
     private var restApi: RestApi
     private var retrofit =
         Retrofit.Builder().baseUrl("https://swapi.co/") //TODO make this a constant
-            .addConverterFactory(GsonConverterFactory.create()).build()
-    var persons: MutableLiveData<ArrayList<Result?>>
-    private lateinit var client: Retrofit
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    private var persons: MutableLiveData<ArrayList<Result?>> //TODO is this needed?
+    private lateinit var client: Retrofit //TODO is this needed?
 
     init {
         restApi = retrofit.create()
-        persons = MutableLiveData()
-
+        persons = MutableLiveData() //TODO is this needed?
     }
 
-//    suspend fun getPersons(personName : String) = restApi.getStarWarsPeople(personName)
-
-    fun getPersonsFromServer(): MutableLiveData<ArrayList<Result?>> {
-        restApi.getStarWarsPeople("").enqueue(object : Callback<PersonResponse> {
-            override fun onResponse(call: Call<PersonResponse>, response: Response<PersonResponse>) {
-                if (response.isSuccessful) {
-                    persons.value = response.body()?.results
-                }
-                else{
-                    //TODO make some error return
-                }
-            }
-
-            override fun onFailure(call: Call<PersonResponse>, t: Throwable) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            }
-        })
-        return persons
-    }
+    //TODO find out a way to handle errors. Alex wrapped the PersonResponse with Response<> so it can see
+    //TODO if it is unsuccesful
+    suspend fun getPersonsFromServer(personName : String) = restApi.getStarWarsPeople(personName)
 }
