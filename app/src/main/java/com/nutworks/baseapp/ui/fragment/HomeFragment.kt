@@ -44,7 +44,7 @@ class HomeFragment : BaseFragment() {
 
     private fun initViewModel(){
         viewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
-//        homeViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(this.activity) TODO make this work
+//        viewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(this.activity) TODO make this work
     }
 
     private fun getPersons(){
