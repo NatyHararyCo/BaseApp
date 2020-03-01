@@ -10,6 +10,7 @@ A playground app which can be used as a base for other applications with similar
 - Livedata
 - Bottom Navigation + Fragments
 - Firebase Authentication
+- Material Design
 
 ### How to use this repo?
 
