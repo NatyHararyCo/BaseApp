@@ -20,7 +20,6 @@ class HomeFragment : BaseFragment() {
         super.onCreate(savedInstanceState)
 
         initViewModel()
-
         getPersons()
     }
 

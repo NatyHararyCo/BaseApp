@@ -56,6 +56,8 @@ class LoginActivity : BaseActivity() {
             startActivityForResult(
                 AuthUI.getInstance()
                     .createSignInIntentBuilder()
+                    .setTheme(R.style.AppTheme)
+                    .setLogo(R.drawable.ic_launcher_foreground)
                     .setAvailableProviders(authProviders)
                     .build(), 200
             )
