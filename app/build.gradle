@@ -7,6 +7,8 @@ apply plugin: 'kotlin-android-extensions'
 // Google services
 apply plugin: 'com.google.gms.google-services'
 
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.1"
@@ -28,6 +30,9 @@ android {
         sourceCompatibility = 1.8
         targetCompatibility = 1.8
     }
+    dataBinding{
+        enabled=true
+    }
 }
 
 dependencies {
@@ -43,7 +48,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 
     // Firebase
-    implementation 'com.google.firebase:firebase-analytics:17.2.2'
+    implementation 'com.google.firebase:firebase-analytics:17.2.3'
     implementation 'com.google.firebase:firebase-auth:19.2.0'
     implementation 'com.firebaseui:firebase-ui-auth:6.2.0'
     implementation 'com.facebook.android:facebook-login:6.1.0'
@@ -59,7 +64,6 @@ dependencies {
     // Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.7.1'
     implementation 'com.squareup.retrofit2:converter-gson:2.7.1'
-
 
     //ViewModel and LiveData dependencies for the coroutines to work
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"

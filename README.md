@@ -11,6 +11,7 @@ A playground app which can be used as a base for other applications with similar
 - Bottom Navigation + Fragments
 - Firebase Authentication
 - Material Design
+- Data binding
 
 ### How to use this repo?
 
