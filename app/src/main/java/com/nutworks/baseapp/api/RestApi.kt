@@ -8,5 +8,7 @@ interface RestApi{
 
     @GET("api/people/")
     suspend fun getStarWarsPeople(
-        @Query("search") search: String): PersonResponse
+        @Query("search") search: String,
+        @Query("page") page: Int
+    ): PersonResponse
 }

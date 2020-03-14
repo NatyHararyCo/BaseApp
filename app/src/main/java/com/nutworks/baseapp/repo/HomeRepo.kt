@@ -20,5 +20,5 @@ class HomeRepo : BaseRepo() {
 
     //TODO find out a way to handle errors. Alex wrapped the PersonResponse with Response<> so it can see
     //TODO if it is unsuccesful
-    suspend fun getPersonsFromServer(personName : String) = restApi.getStarWarsPeople(personName)
+    suspend fun getPersonsFromServer(personName : String, page : Int) = restApi.getStarWarsPeople(personName, page)
 }

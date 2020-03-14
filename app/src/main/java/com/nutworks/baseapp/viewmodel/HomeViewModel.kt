@@ -7,10 +7,13 @@ import com.nutworks.baseapp.repo.HomeRepo
 import kotlinx.coroutines.Dispatchers
 
 class HomeViewModel : BaseViewModel() {
-    private val homeRepo : HomeRepo = HomeRepo()
+    private val homeRepo: HomeRepo = HomeRepo()
 
-    val personsLiveData :  LiveData<ArrayList<Result?>> = liveData(Dispatchers.IO){
-        val retrievedData = homeRepo.getPersonsFromServer("")
-        emit(retrievedData.results!!)
+    fun getPersonsFromRepo(page : Int): LiveData<ArrayList<Result?>> {
+
+        return liveData(Dispatchers.IO) {
+            val retrievedData = homeRepo.getPersonsFromServer("", page)
+            emit(retrievedData.results!!)
+        }
     }
 }

@@ -10,11 +10,16 @@ import com.nutworks.baseapp.api.response.Result
 import com.nutworks.baseapp.databinding.HomeItemBinding
 import com.nutworks.baseapp.model.PersonModel
 
-var personList : ArrayList<PersonModel?> = ArrayList()
+var personList: ArrayList<PersonModel?> = ArrayList()
 
 class HomeAdapter : RecyclerView.Adapter<HomeViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
-        val binding : HomeItemBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context),R.layout.home_item, parent, false)
+        val binding: HomeItemBinding = DataBindingUtil.inflate(
+            LayoutInflater.from(parent.context),
+            R.layout.home_item,
+            parent,
+            false
+        )
         return HomeViewHolder(binding)
     }
 
@@ -26,16 +31,20 @@ class HomeAdapter : RecyclerView.Adapter<HomeViewHolder>() {
         holder.bind(personList[position]!!) //TODO add a smarter nullcheck
     }
 
-    fun setData(result: ArrayList<Result?>){
-        result.forEach{
-            personList.add(PersonModel(it?.name,it?.gender,it?.birth_year))
+    fun setData(result: ArrayList<Result?>, isReplaceExistingList: Boolean) {
+        if (isReplaceExistingList) {
+            personList.clear()
+        }
+        result.forEach {
+            personList.add(PersonModel(it?.name, it?.gender, it?.birth_year))
         }
         notifyDataSetChanged()
     }
 }
 
-class HomeViewHolder(val binding: HomeItemBinding) : RecyclerView.ViewHolder(binding.root){
-    fun bind(data : Any){
+class HomeViewHolder(private val binding: HomeItemBinding) :
+    RecyclerView.ViewHolder(binding.root) {
+    fun bind(data: Any) {
         binding.setVariable(BR.Person, data)
         binding.executePendingBindings()
     }

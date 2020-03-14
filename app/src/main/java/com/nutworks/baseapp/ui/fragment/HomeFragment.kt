@@ -15,12 +15,12 @@ class HomeFragment : BaseFragment() {
 
     private lateinit var adapter : HomeAdapter
     private lateinit var viewModel : HomeViewModel
+    private var pageCount = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         initViewModel()
-        getPersons()
+        setAdapter()
     }
 
     override fun onCreateView(
@@ -29,14 +29,21 @@ class HomeFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         inflater.inflate(R.layout.home_fragment, container, false)
-        adapter = HomeAdapter()
+
+        addMorePersons(pageCount)
+
         return inflater.inflate(R.layout.home_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        setListeners()
+
         recyclerView.layoutManager = LinearLayoutManager(activity)
         recyclerView.adapter = adapter
+
+
     }
 
     override fun initViewModel() {
@@ -44,8 +51,29 @@ class HomeFragment : BaseFragment() {
         viewModel = viewModelProvider.create(HomeViewModel::class.java)
     }
 
-    private fun getPersons(){
-        viewModel.personsLiveData.observe(this, Observer {
-                result -> adapter.setData(result)})
+    private fun setAdapter(){
+        adapter = HomeAdapter()
+    }
+
+    private fun setListeners(){
+        buttonAddMore.setOnClickListener{
+            pageCount += 1
+            addMorePersons(pageCount)
+        }
+
+        buttonGetNext.setOnClickListener{
+            pageCount += 1
+            replaceWithNewPersonsData(pageCount)
+        }
+    }
+
+    private fun addMorePersons(page : Int){
+        viewModel.getPersonsFromRepo(page).observe(viewLifecycleOwner, Observer {
+                result -> adapter.setData(result, false)})
+    }
+
+    private fun replaceWithNewPersonsData(page : Int){
+        viewModel.getPersonsFromRepo(page).observe(viewLifecycleOwner, Observer {
+                result -> adapter.setData(result, true)})
     }
 }
