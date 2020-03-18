@@ -6,7 +6,7 @@
     <string name="navigation_notifications">Notifications</string>
     <string name="navigation_dashboard">Dashboard</string>
     <string name="i_am_in_dashboard_fragment">I am in dashboard fragment!</string>
-    <string name="i_am_in_navigation_fragment">I am in navigation fragment!</string>
+    <string name="i_am_in_navigation_fragment">I am in notification fragment!</string>
     <string name="i_am_in_home_fragment">I am in home fragment!</string>
     <string name="add_more">Add more</string>
     <string name="get_next">Get next</string>

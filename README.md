@@ -12,6 +12,8 @@ A playground app which can be used as a base for other applications with similar
 - Firebase Authentication
 - Material Design
 - Data binding
+- Koin (dependency injection)
+- Glide (for displaying images)
 
 ### How to use this repo?
 

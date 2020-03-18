@@ -73,4 +73,8 @@ dependencies {
     implementation 'org.koin:koin-android:2.1.4'
     // Testing
     testImplementation 'org.koin:koin-test:2.1.4'
+
+    // Glide - image loading
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 }

@@ -1,11 +1,12 @@
 package com.nutworks.baseapp.ui.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
 import com.nutworks.baseapp.R
+import kotlinx.android.synthetic.main.dashboard_fragment.*
 import org.koin.android.ext.android.inject
 
 class DashboardFragment : BaseFragment() {
@@ -23,6 +24,15 @@ class DashboardFragment : BaseFragment() {
     override fun onStart() {
         super.onStart()
 
-        Log.d("NATY", firebaseAuth.getInstance().currentUser?.displayName)
+        val currentUser = firebaseAuth.getInstance().currentUser
+
+        currentUser.let {
+            Glide.with(this).load(it?.photoUrl).into(userImage)
+            userName.text = it?.displayName
+            userEmail.text = it?.email
+        }
+
+
+
     }
 }
